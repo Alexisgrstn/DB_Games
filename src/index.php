@@ -4,9 +4,9 @@ include 'header.php';
 
 <main class="d-flex flex-wrap justify-content-between">
     <?php
-    include 'inc/functions.php';
+    include 'functions.php';
 
-    $records = fetchAllAnimeData();
+    $records = fetchAllGameData();
 
 
     foreach ($records as $record) {
