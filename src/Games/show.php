@@ -1,12 +1,12 @@
 <?php
-include '../../partials/header.php';
-include '../../partials/menu.php';
+include '../header.php';
+include '../menu.php';
 
-include "../../inc/connectDB.php";
+include "../DB/DB_Connect.php";
 $sql = "Select * FROM Anime where id = :id";
 $data = ["id" => $_GET['id']];
 
-$sth = $dbh->prepare($sql);
+$sth = $pdo->prepare($sql);
 $is_successful = $sth->execute($data);
 if ($is_successful) {
     $record = $sth->fetch(PDO::FETCH_ASSOC);

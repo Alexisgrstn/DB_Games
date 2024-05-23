@@ -1,11 +1,11 @@
 <?php
-include '../../partials/header.php';
-include '../../partials/menu.php';
-include '../../inc/functions.php';
+include '../header.php';
+include '../menu.php';
+include '../DB/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    global $dbh;
+    global $pdo;
     $sql = "UPDATE Anime SET type_id =:type, statut_id = :status, nom = :nom,  episode_nb= :nb,	note = :note, img = :img WHERE id = :id";
     $data = [
         'type' => $_POST['typeAnime'],
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'img' => $_POST['img'],
         'id' => $_GET['id']
     ];
-    $sth = $dbh->prepare($sql);
+    $sth = $pdo->prepare($sql);
     $is_successful = $sth->execute($data);
     if ($is_successful) {
         header('Location: ../../index.php');
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $sql = "SELECT * from Anime where id = :id";
 $data = ['id' => $_GET['id']];
 
-$sth = $dbh->prepare($sql);
+$sth = $pdo->prepare($sql);
 $sth->execute($data);
 $record = $sth->fetch();
 // var_dump($record)

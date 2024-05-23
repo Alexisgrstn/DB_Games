@@ -1,11 +1,11 @@
 <?php
-include './partials/header.php';
-include './partials/menu.php';
-include './inc/functions.php';
+include 'header.php';
+include 'menu.php';
+include 'DB/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = '';
-    global $dbh;
+    global $pdo;
 
     assert(!empty($_POST['username']));
     assert(!empty($_POST['password']));
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
         'login' => $_POST['username'],
     ];
-    $sth = $dbh->prepare($sql);
+    $sth = $pdo->prepare($sql);
     try {
         $is_successful = $sth->execute($data);
     } catch (PDOException $e) {

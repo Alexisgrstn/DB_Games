@@ -1,15 +1,15 @@
 <?php
-include '../../partials/header.php';
-include '../../partials/menu.php';
-include '../../inc/functions.php';
+include '../header.php';
+include '../menu.php';
+include '../DB/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    global $dbh;
+    global $pdo;
 
     $sql = "INSERT INTO Duree(label) VALUES (:duration)";
     $data = ['duration' => $_POST['duration']];
-    $sth = $dbh->prepare($sql);
+    $sth = $pdo->prepare($sql);
     $sth->execute($data);
 
     $sql = "INSERT INTO `Anime` (`nom`, `episode_nb`, `note`, `img`, duration_id, `type_id`, `statut_id`) 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         "statut_id" => $_POST["statusAnime"]
     ];
 
-    $sth = $dbh->prepare($sql);
+    $sth = $pdo->prepare($sql);
     try {
         $is_successful = $sth->execute($data);
     } catch (PDOException $e) {

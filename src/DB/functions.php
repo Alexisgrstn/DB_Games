@@ -1,27 +1,17 @@
 <?php
+include __DIR__ . '/DB_Connect.php'; 
 
-include 'connectDB.php';
-function fetchAllGameData()
-{
-    global $dbh;
-    $sql = "Select Anime.id, Anime.nom, Anime.episode_nb, Anime.note, Anime.img, GROUP_CONCAT(Genre.nom) as 'genres'
-        From Anime
-        LEFT JOIN Anime_a_Genre aag ON aag.anime_id = Anime.id
-        LEFT JOIN Genre ON Genre.id = aag.genre_id
-        GROUP BY Anime.id
-        ORDER BY note DESC
-        LIMIT 100 ";
-    $data = [];
-
-    $sth = $dbh->prepare($sql);
-    $is_successful = $sth->execute($data);
-    return $sth->fetchAll();
+function fetchAllGameData() {
+    global $dbh; // Assure-toi que $dbh est accessible
+    $stmt = $dbh->prepare("SELECT * FROM games");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function htmlSelectType($fieldName, $id = null)
 {
-    global $dbh;
-    $sql = "Select id, nom from Type";
+    global $dbh; // Assure-toi que $dbh est accessible
+    $sql = "SELECT id, nom FROM Type";
     $data = [];
 
     $sth = $dbh->prepare($sql);
@@ -43,8 +33,8 @@ function htmlSelectType($fieldName, $id = null)
 }
 function htmlSelectStatus($fieldName, $id = null)
 {
-    global $dbh;
-    $sql = "Select id, nom from Statut;";
+    global $dbh; // Assure-toi que $dbh est accessible
+    $sql = "SELECT id, nom FROM Statut;";
     $data = [];
 
     $sth = $dbh->prepare($sql);
@@ -64,3 +54,4 @@ function htmlSelectStatus($fieldName, $id = null)
     $html .= "</select>";
     return $html;
 }
+?>
