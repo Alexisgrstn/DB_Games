@@ -1,6 +1,6 @@
 <?php
-include 'header.php';
-include 'menu.php';
+include '/header.php';
+include '/menu.php';
 ?>
 <main class="d-flex flex-wrap justify-content-between">
     <?php

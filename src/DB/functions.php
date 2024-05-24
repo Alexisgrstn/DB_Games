@@ -5,7 +5,8 @@ function fetchAllGameData() {
     global $dbh; // Assurer que $dbh est accessible
     $stmt = $dbh->prepare("SELECT * FROM games");
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $records = $stmt->fetchAll();
+    return $records;
 }
 
 function htmlSelectType($fieldName, $id = null) {

@@ -8,6 +8,14 @@ include __DIR__ . '/header.php';
 include __DIR__ . '/DB/functions.php'; // Inclure les fonctions de récupération des données
 
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des jeux</title>
+    <!-- Ajoutez vos balises meta, liens CSS, etc. ici -->
+</head>
 <body>
 
 <main class="d-flex flex-wrap justify-content-between">
@@ -34,9 +42,16 @@ include __DIR__ . '/DB/functions.php'; // Inclure les fonctions de récupératio
                     <div class='position-absolute top-0 start-1 ranking'>" . htmlspecialchars($record['note']) . " / 10.0</div>
                     <div class='card-body'>
                         <h5 class='card-title'>" . htmlspecialchars($record['nom']) . "</h5>
-                        $tags
+                        $tags";
+                        
+            // Vérifier si la clé "id" est définie avant de créer les liens
+            if (isset($record['id'])) {
+                $html .= "
                         <a href='./src/Games/show.php?id=" . htmlspecialchars($record['id']) . "' class='btn btn-primary'>View</a>
-                        <a href='./src/Games/edit.php?id=" . htmlspecialchars($record['id']) . "' class='btn btn-primary'>Edit</a>
+                        <a href='./src/Games/edit.php?id=" . htmlspecialchars($record['id']) . "' class='btn btn-primary'>Edit</a>";
+            }
+            
+            $html .= "
                     </div>
                 </div>
             ";
