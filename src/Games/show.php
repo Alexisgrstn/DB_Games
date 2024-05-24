@@ -3,7 +3,7 @@ include '../header.php';
 include '../menu.php';
 
 include "../DB/DB_Connect.php";
-$sql = "Select * FROM Anime where id = :id";
+$sql = "Select * FROM Games where id = :id";
 $data = ["id" => $_GET['id']];
 
 $sth = $pdo->prepare($sql);

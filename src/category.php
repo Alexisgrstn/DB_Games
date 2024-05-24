@@ -8,16 +8,16 @@ include 'menu.php';
 
     $label = $_GET['name'];
 
-    $sql = "Select Anime.id, Anime.nom, Anime.episode_nb, Anime.note, Anime.img, GROUP_CONCAT(Genre.nom) as 'genres'
-    From Anime
-    JOIN Anime_a_Genre aag ON aag.anime_id = Anime.id
+    $sql = "Select Games.id, Games.nom, Games.note, Games.img, GROUP_CONCAT(Genre.nom) as 'genres'
+    From Games
+    JOIN Games_a_Genre aag ON aag.games_id = Games.id
     JOIN Genre ON Genre.id = aag.genre_id
-    WHERE Anime.id IN (Select Anime.id
-        From Anime
-        JOIN Anime_a_Genre aag ON aag.anime_id = Anime.id
+    WHERE Games.id IN (Select Games.id
+        From Games
+        JOIN Games_a_Genre aag ON aag.games_id = Games.id
         JOIN Genre ON Genre.id = aag.genre_id
         WHERE Genre.nom = :label)
-    GROUP BY Anime.id
+    GROUP BY Games.id
     ORDER BY note DESC";
     $data = ["label" => $label];
 
@@ -42,9 +42,8 @@ include 'menu.php';
                     <div class='card-body'>
                         <h5 class='card-title'>" . $record['nom'] . "</h5>
                         $tags
-                        <p class='card-text'> Nb Episodes : " . $record['episode_nb'] . "</p>
                         
-                        <a href='./src/animes/show.php?id=" . $record['id'] . "' class='btn btn-primary'>View</a>
+                        <a href='./src/Ga/show.php?id=" . $record['id'] . "' class='btn btn-primary'>View</a>
                     </div>
                 </div>
             ";

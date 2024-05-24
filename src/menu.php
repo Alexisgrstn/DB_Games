@@ -11,7 +11,7 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/src/animes/create.php">Create</a>
+                    <a class="nav-link active" aria-current="page" href="/src/Games/create.php">Create</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/src/favorites/">Favorites</a>

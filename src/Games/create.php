@@ -7,20 +7,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     global $pdo;
 
-    $sql = "INSERT INTO Duree(label) VALUES (:duration)";
-    $data = ['duration' => $_POST['duration']];
+    $sql = "INSERT INTO Edit(label) VALUES (:edition)";
+    $data = ['edition' => $_POST['edition']];
     $sth = $pdo->prepare($sql);
     $sth->execute($data);
 
-    $sql = "INSERT INTO `Anime` (`nom`, `episode_nb`, `note`, `img`, duration_id, `type_id`, `statut_id`) 
-            VALUES (:nom, :episode_nb, :note, :img,  LAST_INSERT_ID() , :type_id, :statut_id);";
+    $sql = "INSERT INTO `Games` (`nom`, `note`, `img`, edition_id, `type_id`, `statut_id`) 
+            VALUES (:nom, :note, :img,  LAST_INSERT_ID() , :type_id, :statut_id);";
     $data = [
-        "nom" => $_POST["nameAnime"] ?? null,
-        "episode_nb" => $_POST["nombre_episodes"],
+        "nom" => $_POST["nameGames"] ?? null,
         "note" => $_POST["note"],
         "img" => $_POST["img"],
-        "type_id" => $_POST["typeAnime"],
-        "statut_id" => $_POST["statusAnime"]
+        "type_id" => $_POST["typeGames"],
+        "statut_id" => $_POST["statusGames"]
     ];
 
     $sth = $pdo->prepare($sql);
@@ -41,33 +40,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form action='#' method='POST'>
         <div class="mb-3">
-            <label for="nameAnime" class="form-label">Nom de l'anime</label>
-            <input type="text" class="form-control" id="nameAnime" name="nameAnime" aria-describedby="nameAnime"
+            <label for="nameGames" class="form-label">Nom de du jeux</label>
+            <input type="text" class="form-control" id="nameGames" name="nameGames" aria-describedby="nameGames"
                 placeholder="">
         </div>
         <div class="mb-3">
-            <label for="nbEpisodesAnime" class="form-label">Nb Episodes</label>
-            <input type="number" class="form-control" name="nombre_episodes" id="nbEpisodesAnime" min=0 step=1>
+            <label for="edition" class="form-label">Edition</label>
+            <input type="text" class="form-control" name="edition" id="edition">
         </div>
         <div class="mb-3">
-            <label for="duration" class="form-label">Duration</label>
-            <input type="text" class="form-control" name="duration" id="duration">
+            <label for="noteGames" class="form-label">Note</label>
+            <input type="number" class="form-control" id="noteGames" name="note" min=0 max=10 step=0.01>
         </div>
         <div class="mb-3">
-            <label for="noteAnime" class="form-label">Note</label>
-            <input type="number" class="form-control" id="noteAnime" name="note" min=0 max=10 step=0.01>
+            <label for="imgGames" class="form-label">Image</label>
+            <input type="url" class="form-control" id="imgGames" name="img">
         </div>
         <div class="mb-3">
-            <label for="imgAnime" class="form-label">Image</label>
-            <input type="url" class="form-control" id="imgAnime" name="img">
+            <label for="typeGames" class="form-label">Type</label>
+            <?= htmlSelectType("typeGames") ?>
         </div>
         <div class="mb-3">
-            <label for="typeAnime" class="form-label">Type</label>
-            <?= htmlSelectType("typeAnime") ?>
-        </div>
-        <div class="mb-3">
-            <label for="statusAnime" class="form-label">Statut</label>
-            <?= htmlSelectStatus("statusAnime") ?>
+            <label for="statusGames" class="form-label">Statut</label>
+            <?= htmlSelectStatus("statusGames") ?>
         </div>
 
         <button type="submit" class="btn btn-primary">Enregistrer</button>

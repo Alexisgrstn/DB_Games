@@ -1,8 +1,8 @@
 <?php
-$hostname = "10.36.0.45";
+$hostname = "localhost";
 $dbname = 'infrastructure';
-$dbuser = 'alexis';
-$dbpass = 'JESAISPAS';
+$dbuser = 'root';
+$dbpass = '';
 
 try {
     $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $dbuser, $dbpass);
