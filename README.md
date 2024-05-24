@@ -51,7 +51,7 @@ INSTALLATION:
 -Lancer Apache 
 -Lancer MySQL
 -aller sur votre navigateur web 
--taper [localhost://](http://localhost/DB_Games/src/)
+-taper http://localhost/DB_Games/src/
 
 Naviguez dans les jeux vidéo, visualisez leurs détails, et modifiez les informations selon vos besoins.
 
